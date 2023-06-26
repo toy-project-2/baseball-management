@@ -26,4 +26,29 @@ public class PlayerDAO {
         }
     }
 
+    public List<Player> getAllPlayer() {
+        List<Player> players = new ArrayList<>();
+        String query = "select * from player_tb";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Player player = new Player(
+                        rs.getInt("player_id"),
+                        rs.getInt("team_id"),
+                        rs.getString("player_name"),
+                        rs.getString("position"),
+                        rs.getTimestamp("created_at")
+                );
+                players.add(player);
+            }
+            return players;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return players;
+    }
 }
