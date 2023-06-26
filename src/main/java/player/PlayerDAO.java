@@ -65,4 +65,18 @@ public class PlayerDAO {
         }
     }
 
+    public void emitPlayer(int playerId) {
+        String query = "update player_tb set team_id = ? where player_Id = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setNull(1, Types.INTEGER);
+            statement.setInt(2, playerId);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
