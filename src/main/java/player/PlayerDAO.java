@@ -51,4 +51,18 @@ public class PlayerDAO {
         }
         return players;
     }
+
+    public void deletePlayer(int playerId) {
+        String query = "delete from player_tb where player_id = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, playerId);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
