@@ -1,6 +1,5 @@
 package team;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
@@ -13,12 +12,14 @@ public class Team {
 
     private Integer teamId;
     private String teamName;
+    private Integer stadiumId;
     private Double winningRate;
     private Timestamp teamCreatedAt;
 
     @Builder
-    public Team(Integer teamId, String teamName, Double winningRate, Timestamp teamCreatedAt) {
+    public Team(Integer teamId, Integer stadiumId, String teamName, Double winningRate, Timestamp teamCreatedAt) {
         this.teamId = teamId;
+        this.stadiumId = stadiumId;
         this.teamName = teamName;
         this.winningRate = winningRate;
         this.teamCreatedAt = teamCreatedAt;
