@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 
 @Getter
 @AllArgsConstructor
-@ToString
 public class Player {
 
     private int playerId;
