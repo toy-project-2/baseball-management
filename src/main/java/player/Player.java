@@ -17,4 +17,14 @@ public class Player {
     private String position;
     private Timestamp createdAt;
 
+    @Override
+    public String toString() {
+        return "Player{" +
+                "playerId=" + playerId +
+                ", teamId=" + teamId +
+                ", playerName='" + playerName + '\'' +
+                ", position='" + position + '\'' +
+                ", createdAt=" + createdAt +
+                '}' + '\n';
+    }
 }
