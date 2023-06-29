@@ -8,7 +8,6 @@ import java.sql.Timestamp;
 
 @Getter
 @AllArgsConstructor
-@ToString
 public class Player {
 
     private int playerId;
@@ -17,4 +16,14 @@ public class Player {
     private String position;
     private Timestamp createdAt;
 
+    @Override
+    public String toString() {
+        return "Player{" +
+                "playerId=" + playerId +
+                ", teamId=" + teamId +
+                ", playerName='" + playerName + '\'' +
+                ", position='" + position + '\'' +
+                ", createdAt=" + createdAt +
+                '}' + '\n';
+    }
 }

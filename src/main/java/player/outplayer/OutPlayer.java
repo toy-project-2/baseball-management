@@ -1,4 +1,4 @@
-package outplayer;
+package player.outplayer;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
