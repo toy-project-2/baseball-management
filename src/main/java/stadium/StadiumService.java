@@ -1,43 +1,37 @@
 package stadium;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class StadiumService {
-    private StadiumDAO stadiumDAO;
 
-    public StadiumService(StadiumDAO stadiumDAO) {
-        this.stadiumDAO = stadiumDAO;
-    }
+    private static final StadiumDAO stadiumDAO = StadiumDAO.getInstance();
+    private static StadiumService stadiumService;
 
-    public Stadium insertStadium(int stadiumId, String stadiumName, String stadiumLocation) throws SQLException {
-        if (stadiumName == null || stadiumLocation == null) {
-            System.out.println("null 값을 입력할 수 없습니다.");
+    public static StadiumService getInstance() {
+        if (stadiumService == null) {
+            stadiumService = new StadiumService();
         }
-
-        return this.stadiumDAO.insert(stadiumId, stadiumName, stadiumLocation);
+        return stadiumService;
     }
 
-    public List<Stadium> selectStadiums() throws SQLException {
-        List<Stadium> stadiumList = this.stadiumDAO.select();
-        return stadiumList;
-    }
-
-    public Stadium selectStadium(String name) throws SQLException {
-        Stadium stadium = this.stadiumDAO.selectByName(name);
-        return stadium;
-    }
-
-    public Stadium updateStadium(int stadiumId, String updateStadiumName) throws SQLException {
-        Stadium updatedStadium = this.stadiumDAO.updateByName(stadiumId, updateStadiumName);
-        return updatedStadium;
-    }
-
-    public void deleteStadium(int stadiumId) throws SQLException {
-        int result = this.stadiumDAO.delete(stadiumId);
-        if (result >= 1) {
-            System.out.println("삭제에 성공하였습니다.");
+    public void insert(String stadiumName) {
+        int result = stadiumDAO.insert(stadiumName);
+        if (result > 0) {
+            System.out.println("등록에 성공하였습니다.");
+        } else {
+            System.out.println("등록에 실패하였습니다. 다시 시도해주세요.");
         }
-
     }
+
+    public void select() {
+        List<Stadium> stadiumList = stadiumDAO.select();
+        if (stadiumList.isEmpty()) {
+            System.out.println("야구장이 비어 있습니다.");
+        } else {
+            for (Stadium stadium : stadiumList) {
+                System.out.println(stadium);
+            }
+        }
+    }
+
 }
