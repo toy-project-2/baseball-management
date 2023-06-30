@@ -18,7 +18,8 @@ public class UrlUtil {
             String[] parameter = parameters.split("&");
             for (String param : parameter) {
                 String[] p = param.split("=");
-                map.put(p[0], p[1]);
+                if (p.length == 2)
+                    map.put(p[0], p[1]);
             }
         }
     }
@@ -53,9 +54,9 @@ public class UrlUtil {
     }
 
     public void printAllParameter() {
-        map.forEach((key, value) -> {
-            System.out.println(key + ":" + value);
-        });
+        map.forEach((key, value) ->
+                System.out.println(key + ":" + value)
+        );
     }
 
 }
