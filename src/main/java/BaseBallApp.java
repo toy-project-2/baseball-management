@@ -1,12 +1,11 @@
 import db.DBConnection;
-import player.PlayerDAO;
 import player.PlayerService;
-import player.outplayer.OutPlayerDAO;
+import stadium.StadiumService;
+import team.TeamService;
 import util.UrlUtil;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
 
 public class BaseBallApp {
 
@@ -29,9 +28,10 @@ public class BaseBallApp {
         PlayerDAO pd = PlayerDAO.getInstance(connection);
         OutPlayerDAO od = OutPlayerDAO.getInstance(connection);
         PlayerService ps = PlayerService.getInstance(connection);
+        StadiumService ss = StadiumService.getInstance();
+        TeamService ts = TeamService.getInstance();
 
         while (true) {
-
             UrlUtil util = UrlUtil.run();
 
             if (util.getPath().equals("선수등록")) {
@@ -41,50 +41,24 @@ public class BaseBallApp {
                         util.getStringParameter("position")
                 );
             } else if (util.getPath().equals("선수목록")) {
-                System.out.println("선수목록");
-                util.printAllParameter();
-                ps.getAllPlayers(
-                        Integer.parseInt(util.getStringParameter("teamId"))
-                );
+                ps.getAllPlayers(util.getIntegerParameter("teamId"));
             } else if (util.getPath().equals("퇴출등록")) {
-                System.out.println("퇴출등록");
-                util.printAllParameter();
-                // dao 에서 에러 처리 ?
-                ps.emitPlayer(
-                        util.getIntegerParameter("playerId"),
-                        util.getStringParameter("reason")
-                );
+                ps.emitPlayer(util.getIntegerParameter("playerId"), util.getStringParameter("reason"));
             } else if (util.getPath().equals("퇴출목록")) {
-                System.out.println("퇴출목록");
-                util.printAllParameter();
                 ps.getAllEmittedPlayers();
-
             } else if (util.getPath().equals("포지션별목록")) {
-                System.out.println("포지션별목록");
-                util.printAllParameter();
                 ps.getAllPlayersGroupByPosition();
             } else if (util.getPath().equals("야구장등록")) {
-                System.out.println("야구장등록");
-                util.printAllParameter();
-            } else if (util.getPath().equals("팀목록")) {
-                System.out.println("팀목록");
-                util.printAllParameter();
+                ss.insert(util.getStringParameter("name"));
+            } else if (util.getPath().equals("야구장목록")) {
+                ss.select();
             } else if (util.getPath().equals("팀등록")) {
-                System.out.println("팀등록");
-                util.printAllParameter();
+                ts.insertTeam(util.getIntegerParameter("stadiumId"), util.getStringParameter("name"));
             } else if (util.getPath().equals("팀목록")) {
-                System.out.println("팀목록");
-                util.printAllParameter();
+                ts.selectTeams();
             } else {
                 System.out.println("⊙﹏⊙ 잘못된 형식입니다. 다시 입력해주세요!! ⊙﹏⊙\n");
             }
         }
-
     }
-
 }
-
-
-
-
-
