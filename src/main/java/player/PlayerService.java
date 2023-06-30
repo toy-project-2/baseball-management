@@ -25,7 +25,7 @@ public class PlayerService {
     /**
      * 선수등록 (insert() 호출)
      */
-    public void insertPlayer(int teamId, String playerName, String position) {
+    public void insertPlayer(Integer teamId, String playerName, String position) {
         int result =  playerDAO.insert(teamId, playerName, position);
         if ( result == 1 )
             System.out.println("성공");

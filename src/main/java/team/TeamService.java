@@ -26,7 +26,7 @@ public class TeamService {
     }
 
     public void selectTeams() {
-        List<TeamRespDTO> teamRespDTOS = teamDAO.selectTeams();
+        List<TeamRespDTO> teamRespDTOS = teamDAO.select();
         if (teamRespDTOS.isEmpty()) {
             System.out.println("팀이 비어있습니다.");
         } else {

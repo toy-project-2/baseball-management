@@ -23,7 +23,7 @@ public class PlayerDAO {
     /**
      * 선수등록 (insert)
      */
-    public int insert(int teamId, String playerName, String position) {
+    public int insert(Integer teamId, String playerName, String position) {
         String query = "insert into player_tb (team_id, name, position) values (?, ?, ?);";
         try {
             PreparedStatement statement = connection.prepareStatement(query);
