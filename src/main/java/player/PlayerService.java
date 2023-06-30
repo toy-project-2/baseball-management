@@ -29,9 +29,9 @@ public class PlayerService {
     public void insertPlayer(Integer teamId, String playerName, String position) {
         int result =  playerDAO.insert(teamId, playerName, position);
         if ( result == 1 )
-            System.out.println("성공");
+            System.out.println("등록에 성공하였습니다. ");
         else
-            System.out.println("실패");
+            System.out.println("등록에 실패하였습니다. ");
     }
 
     /**
@@ -53,11 +53,11 @@ public class PlayerService {
             outPlayerDAO.insert(playerId, reason);
 
             connection.commit();
-            System.out.println("성공");
+            System.out.println("등록에 성공하였습니다. ");
         } catch (SQLException e) {
             connection.rollback();
 //            e.printStackTrace();
-            System.out.println("실패");
+            System.out.println("등록에 실패하였습니다.");
         } finally {
             connection.setAutoCommit(true);
         }

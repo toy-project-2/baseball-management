@@ -34,7 +34,17 @@ public class PlayerDAO {
             return statement.executeUpdate();
 
         } catch (NullPointerException e) {
-            System.out.println(e.getMessage());
+            StringBuilder sb = new StringBuilder();
+            if(teamId == null) {
+                sb.append("teamId 는 필수 입니다.").append("\n");
+            }
+            if(playerName == null) {
+                sb.append("name 은 필수 입니다.").append("\n");
+            }
+            if(position == null) {
+                sb.append("position 은 필수 입니다.").append("\n");
+            }
+            System.out.println(sb);
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
