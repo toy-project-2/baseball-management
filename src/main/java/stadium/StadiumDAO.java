@@ -8,7 +8,7 @@ import java.util.List;
 
 public class StadiumDAO {
 
-    private Connection connection = DBConnection.getInstance();
+    private final Connection connection = DBConnection.getInstance();
     private static StadiumDAO stadiumDAO;
 
     public static StadiumDAO getInstance() {

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class TeamService {
 
-    private final TeamDAO teamDAO = TeamDAO.getInstance();
+    private static final TeamDAO teamDAO = TeamDAO.getInstance();
     private static TeamService teamService;
 
     public static TeamService getInstance() {

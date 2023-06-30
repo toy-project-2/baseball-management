@@ -9,7 +9,7 @@ import java.util.List;
 
 public class TeamDAO {
 
-    private Connection connection = DBConnection.getInstance();
+    private static final Connection connection = DBConnection.getInstance();
     private static TeamDAO teamDAO;
 
     public static TeamDAO getInstance() {
@@ -29,9 +29,16 @@ public class TeamDAO {
             statement.setString(2, teamName);
             return statement.executeUpdate();
         } catch (NullPointerException e) {
-            System.out.println(e.getMessage());
+            StringBuilder sb = new StringBuilder();
+            if(stadiumId == null) {
+                sb.append("stadiumId 는 필수 입니다.").append("\n");
+            }
+            if(teamName == null) {
+                sb.append("teamName 은 필수 입니다.").append("\n");
+            }
+            System.out.println(sb);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("존재하지 않는 stadiumId 입니다.");
         }
         return -1;
     }
