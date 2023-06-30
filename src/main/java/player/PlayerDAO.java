@@ -57,7 +57,7 @@ public class PlayerDAO {
     /**
      * 선수목록 (select)
      */
-    public List<Player> select(int teamId) {
+    public List<Player> select(Integer teamId) {
         List<Player> players = new ArrayList<>();
         String query = "select * from player_tb where team_id = ?";
         try {
@@ -79,7 +79,11 @@ public class PlayerDAO {
             return players;
 
         } catch (NullPointerException e) {
-            System.out.println(e.getMessage());
+            StringBuilder sb = new StringBuilder();
+            if(teamId == null) {
+                sb.append("teamId 는 필수 입니다.").append("\n");
+            }
+            System.out.println(sb);
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());

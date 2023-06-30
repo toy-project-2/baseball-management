@@ -37,7 +37,7 @@ public class PlayerService {
     /**
      * 선수목록 (select() 호출)
      */
-    public void getAllPlayers(int teamid) {
+    public void getAllPlayers(Integer teamid) {
         System.out.println(playerDAO.select(teamid));
     }
 
