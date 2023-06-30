@@ -1,6 +1,7 @@
 package player;
 
 import player.outplayer.OutPlayerDAO;
+import player.outplayer.OutReason;
 
 import java.sql.Connection;
 import java.sql.SQLException;

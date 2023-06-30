@@ -2,6 +2,7 @@ import db.DBConnection;
 import player.PlayerDAO;
 import player.PlayerService;
 import player.outplayer.OutPlayerDAO;
+import player.outplayer.OutReason;
 import stadium.StadiumService;
 import team.TeamService;
 import util.UrlUtil;
@@ -50,10 +51,13 @@ public class BaseBallApp {
                 );
 
             } else if (util.getPath().equals("퇴출등록")) {
-                ps.emitPlayer(
-                        util.getIntegerParameter("playerId"),
-                        util.getStringParameter("reason")
-                );
+                if(OutReason.isOutReason(util.getStringParameter("reason"))) {
+                    ps.emitPlayer(
+                            util.getIntegerParameter("playerId"),
+                            util.getStringParameter("reason")
+                    );
+                }else
+                    System.out.println("존재하지 않는 사유입니다.");
 
             } else if (util.getPath().equals("퇴출목록")) {
                 ps.getAllOutPlayers();
