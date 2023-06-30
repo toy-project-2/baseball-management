@@ -35,7 +35,7 @@ public class OutPlayerDAO {
             int result = statement.executeUpdate();
             return result;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return 0;
     }
@@ -66,7 +66,7 @@ public class OutPlayerDAO {
             return outPlayers;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return outPlayers;
     }

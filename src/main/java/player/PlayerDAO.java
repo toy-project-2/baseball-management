@@ -33,8 +33,11 @@ public class PlayerDAO {
 
             return statement.executeUpdate();
 
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
 
         }
         return 0;
@@ -65,8 +68,11 @@ public class PlayerDAO {
             }
             return players;
 
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return players;
     }
@@ -85,8 +91,11 @@ public class PlayerDAO {
             int result = statement.executeUpdate();
             return result;
 
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return 0;
     }
@@ -119,7 +128,7 @@ public class PlayerDAO {
             return playersGroupByPosition;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return playersGroupByPosition;
     }
