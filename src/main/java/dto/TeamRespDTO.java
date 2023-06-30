@@ -15,19 +15,15 @@ public class TeamRespDTO {
     private int teamId;
     private int stadiumId;
     private String teamName;
-    private double winningRate;
     private Timestamp teamCreatedAt;
     private String stadiumName;
-    private String location;
 
     @Builder
-    public TeamRespDTO(int teamId, int stadiumId, String teamName, double winningRate, Timestamp teamCreatedAt, String stadiumName, String location) {
+    public TeamRespDTO(int teamId, int stadiumId, String teamName, Timestamp teamCreatedAt, String stadiumName) {
         this.teamId = teamId;
         this.stadiumId = stadiumId;
         this.teamName = teamName;
-        this.winningRate = winningRate;
         this.teamCreatedAt = teamCreatedAt;
         this.stadiumName = stadiumName;
-        this.location = location;
     }
 }

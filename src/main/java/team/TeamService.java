@@ -6,23 +6,35 @@ import java.util.List;
 
 public class TeamService {
 
-    private TeamDAO teamDAO;
+    private final TeamDAO teamDAO = TeamDAO.getInstance();
+    private static TeamService teamService;
 
-    public TeamService(TeamDAO teamDAO) {
-        this.teamDAO = teamDAO;
+    public static TeamService getInstance() {
+        if (teamService == null) {
+            teamService = new TeamService();
+        }
+        return teamService;
     }
 
-    public Team insertTeam(int stadiumId, String teamName, double winningRate) {
-        Team team = teamDAO.insert(stadiumId, teamName, winningRate);
-        return team;
+    public void insertTeam(Integer stadiumId, String teamName) {
+        int result = teamDAO.insert(stadiumId, teamName);
+        if (result > 0) {
+            System.out.println("팀등록에 성공하였습니다.");
+        } else {
+            System.out.println("팀등록에 실패하였습니다.");
+        }
     }
 
-    public List<TeamRespDTO> selectTeams() {
+    public void selectTeams() {
         List<TeamRespDTO> teamRespDTOS = teamDAO.selectTeams();
-        return teamRespDTOS;
+        if (teamRespDTOS.isEmpty()) {
+            System.out.println("팀이 비어있습니다.");
+        } else {
+            for (TeamRespDTO teamRespDTO : teamRespDTOS) {
+                System.out.println(teamRespDTO);
+            }
+        }
     }
-
-
 
 
 }
