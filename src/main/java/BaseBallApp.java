@@ -63,7 +63,7 @@ import java.util.Scanner;
                     );
 
                 } else if (util.getPath().equals("퇴출목록")) {
-                    ps.getAllEmittedPlayers();
+                    ps.getAllOutPlayers();
 
                 } else if (util.getPath().equals("포지션별목록")) {
                     ps.getAllPlayersGroupByPosition();
