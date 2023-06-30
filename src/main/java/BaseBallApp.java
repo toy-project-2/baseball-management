@@ -1,5 +1,7 @@
 import db.DBConnection;
+import player.PlayerDAO;
 import player.PlayerService;
+import player.outplayer.OutPlayerDAO;
 import stadium.StadiumService;
 import team.TeamService;
 import util.UrlUtil;
@@ -37,20 +39,20 @@ public class BaseBallApp {
 
         if (util.getPath().equals("선수등록")) {
                 ps.insertPlayer(
-                        Integer.parseInt(util.getParameter("teamId")),
-                        util.getParameter("name"),
-                        util.getParameter("position")
+                        util.getIntegerParameter("teamId"),
+                        util.getStringParameter("name"),
+                        util.getStringParameter("position")
                 );
 
             } else if (util.getPath().equals("선수목록")) {
                 ps.getAllPlayers(
-                        Integer.parseInt(util.getParameter("teamId"))
+                        util.getIntegerParameter("teamId")
                 );
 
             } else if (util.getPath().equals("퇴출등록")) {
                 ps.emitPlayer(
-                        Integer.parseInt(util.getParameter("playerId")),
-                        util.getParameter("reason")
+                        util.getIntegerParameter("playerId"),
+                        util.getStringParameter("reason")
                 );
 
             } else if (util.getPath().equals("퇴출목록")) {
@@ -58,15 +60,21 @@ public class BaseBallApp {
 
             } else if (util.getPath().equals("포지션별목록")) {
                 ps.getAllPlayersGroupByPosition();
-            }
+
             } else if (util.getPath().equals("야구장등록")) {
                 ss.insert(util.getStringParameter("name"));
+
             } else if (util.getPath().equals("야구장목록")) {
                 ss.select();
+
             } else if (util.getPath().equals("팀등록")) {
-                ts.insertTeam(util.getIntegerParameter("stadiumId"), util.getStringParameter("name"));
+                ts.insertTeam(
+                        util.getIntegerParameter("stadiumId"),
+                        util.getStringParameter("name"));
+
             } else if (util.getPath().equals("팀목록")) {
                 ts.selectTeams();
+
             } else {
                 System.out.println("⊙﹏⊙ 잘못된 형식입니다. 다시 입력해주세요!! ⊙﹏⊙\n");
 

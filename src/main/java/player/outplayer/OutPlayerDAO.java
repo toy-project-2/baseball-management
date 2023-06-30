@@ -55,8 +55,8 @@ public class OutPlayerDAO {
 
             while (rs.next()) {
                 OutPlayerRespDTO outPlayerRespDTO = OutPlayerRespDTO.builder()
-                        .playerId(rs.getInt("player_id"))
-                        .playerName(rs.getString("player_name"))
+                        .playerId(rs.getInt("id"))
+                        .playerName(rs.getString("name"))
                         .position(rs.getString("position"))
                         .reason(rs.getString("reason"))
                         .createdAt(rs.getTimestamp("created_at"))
