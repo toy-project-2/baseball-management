@@ -7,6 +7,7 @@ import util.UrlUtil;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+
 public class BaseBallApp {
 
     /**
@@ -34,20 +35,30 @@ public class BaseBallApp {
         while (true) {
             UrlUtil util = UrlUtil.run();
 
-            if (util.getPath().equals("선수등록")) {
+        if (util.getPath().equals("선수등록")) {
                 ps.insertPlayer(
-                        util.getIntegerParameter("teamId"),
-                        util.getStringParameter("name"),
-                        util.getStringParameter("position")
+                        Integer.parseInt(util.getParameter("teamId")),
+                        util.getParameter("name"),
+                        util.getParameter("position")
                 );
+
             } else if (util.getPath().equals("선수목록")) {
-                ps.getAllPlayers(util.getIntegerParameter("teamId"));
+                ps.getAllPlayers(
+                        Integer.parseInt(util.getParameter("teamId"))
+                );
+
             } else if (util.getPath().equals("퇴출등록")) {
-                ps.emitPlayer(util.getIntegerParameter("playerId"), util.getStringParameter("reason"));
+                ps.emitPlayer(
+                        Integer.parseInt(util.getParameter("playerId")),
+                        util.getParameter("reason")
+                );
+
             } else if (util.getPath().equals("퇴출목록")) {
-                ps.getAllEmittedPlayers();
+                ps.getAllOutPlayers();
+
             } else if (util.getPath().equals("포지션별목록")) {
                 ps.getAllPlayersGroupByPosition();
+            }
             } else if (util.getPath().equals("야구장등록")) {
                 ss.insert(util.getStringParameter("name"));
             } else if (util.getPath().equals("야구장목록")) {
@@ -58,6 +69,7 @@ public class BaseBallApp {
                 ts.selectTeams();
             } else {
                 System.out.println("⊙﹏⊙ 잘못된 형식입니다. 다시 입력해주세요!! ⊙﹏⊙\n");
+
             }
         }
     }

@@ -23,8 +23,10 @@ public class OutPlayerDAO {
     /**
      * 퇴출등록 (insert)
      */
-    public int insertOutPlayerByQuery (int playerId, String reason) {
-        String query = "insert into out_player_tb (player_id, reason, created_at) values (?, ?, now())";
+
+    public int insert(int playerId, String reason) {
+        String query = "insert into out_player_tb (player_id, reason) values (?, ?)";
+
         try {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setInt(1, playerId);
@@ -41,10 +43,11 @@ public class OutPlayerDAO {
     /**
      * 퇴출목록 (select (outer join))
      */
-    public List<OutPlayerRespDTO> selectOutPlayerByQuery() {
+
+    public List<OutPlayerRespDTO> select() {
         List<OutPlayerRespDTO> outPlayers = new ArrayList<>();
-        String query = "select player_tb.player_id, player_tb.player_name, player_tb.position, out_player_tb.reason, out_player_tb.created_at\n" +
-                "from out_player_tb left outer join player_tb on out_player_tb.player_id = player_tb.player_id;";
+        String query = "select player_tb.id, player_tb.name, player_tb.position, out_player_tb.reason, out_player_tb.created_at from out_player_tb left outer join player_tb on out_player_tb.id = player_tb.id";
+
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 

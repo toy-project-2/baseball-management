@@ -4,7 +4,6 @@ import player.outplayer.OutPlayerDAO;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 public class PlayerService {
 
@@ -24,10 +23,10 @@ public class PlayerService {
     }
 
     /**
-     * 선수등록
+     * 선수등록 (insert() 호출)
      */
     public void insertPlayer(int teamId, String playerName, String position) {
-        int result =  playerDAO.insertPlayerByQuery(teamId, playerName, position);
+        int result =  playerDAO.insert(teamId, playerName, position);
         if ( result == 1 )
             System.out.println("성공");
         else
@@ -35,10 +34,10 @@ public class PlayerService {
     }
 
     /**
-     * 선수목록
+     * 선수목록 (select() 호출)
      */
     public void getAllPlayers(int teamid) {
-        System.out.println(playerDAO.selectPlayerByQuery(teamid));
+        System.out.println(playerDAO.select(teamid));
     }
 
     /**
@@ -49,8 +48,8 @@ public class PlayerService {
         try {
             connection.setAutoCommit(false);
 
-            playerDAO.emitPlayerByQuery(playerId);
-            outPlayerDAO.insertOutPlayerByQuery(playerId, reason);
+            playerDAO.update(playerId);
+            outPlayerDAO.insert(playerId, reason);
 
             connection.commit();
             System.out.println("성공");
@@ -66,15 +65,15 @@ public class PlayerService {
     /**
      * 퇴출목록
      */
-    public void getAllEmittedPlayers() {
-        System.out.println(outPlayerDAO.selectOutPlayerByQuery());
+    public void getAllOutPlayers() {
+        System.out.println(outPlayerDAO.select());
     }
 
     /**
      * 포지션별목록
      */
     public void getAllPlayersGroupByPosition() {
-        System.out.println(playerDAO.playerGroupByPosition());
+        System.out.println(playerDAO.selectPivot());
     }
 
 }
